@@ -1,23 +1,21 @@
 notifications:
   email: false
-
 language: go
 go:
-- '1.11.x'
-
+- 1.11.x
 install:
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-  - go get -u github.com/gobuffalo/packr/packr
-
+- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+- go get -u github.com/gobuffalo/packr/packr
+script:
+- make test
 before_deploy:
 - make dist
-
 deploy:
   provider: releases
   api_key:
-    secure: Quf9iTVb64cZpGWsaCvKQPjUn7+Y9CR+/pm/ywVadrXyM3CNQO9rb65AOPDkvN29kWazXDKr9SZUy9cE1eokfQEM0ojnNAhyF1+hYwxH78BDJHYDRqZCQJ/ZDvOp4hgDD7st9P/SbDjdQ3yECq/0X0qMH9nfL183kP6qChltl9gBauNRU/qRwH9RCECIPOaWX3psp/2ICwSTTPm4s1TjjFj0sFBNYGfZ8hFo0aitCtwp5xwFoh7ezeoUUYMS2CHtqJJZEvRZos7tBuZaHSOapMJ67HyIhMdRo2H0LXGxYSkt4SnPdHBrtlnrooNMTRHOT6AbGk3t8tFMc6J/Pm425mLCYy3yXpsEb9TAEfBh8mLF2vQogzxNgo44X7q592P19TjlYZ54b1/o/umL22J+0zFW61gLi8wXjyY1WVcYe3KwEPVhOKXfWQpzbQ6Zc6T5Ki5/c8JbghxbxGf5Z4gxIcS35FxmgGhrqV6SWlE6AmnUt6iMJquL9SInSljQc5uKzjwUy7hplcWCVGaDzZ9JJlNwo5m5lqR5w5vP3c/XWs1u0PvcxOIm+ekAxUI/c8lFk4+CS91J2lNuE2DNJm/A5gCWbM8LKVErtLxVeQlGKlZ1wNN5Ohyr0k139pbZhZTSLbbVksqkE88skLMOnVW4adgNK4oeArlUkd5kXQF8Q/o=
+    secure: PNdace/6EZAnI93l4dkhb1re/BSKucZmJf7jlapvc6saVmU5VIS+ZHBk1UTiCvvcz0NxweR52lxKCBtdhOBEFVeMLr4iEuGDxTk8omVIts7L9ntkt+q2YeOGV3sK8LvrmbxcV+tLW/DGv8blc0zCMAbNTjMN3CT21C/+qe1ObfUfIhInXaB7rK9wqWVKBtZsHbjkQxkIhg1aJZ7x6keLPBoOLxwIw2U3rLPCsEYBLrfBr9pe8NrTGw+/eDycMM4b+zHIT5SOYKH01G4zxZK2R9SgmqAyU/YOhBCCDIXTtLYPkfqLuQfvH2dHyZdbKnF6qYWiz+qu0nknVXN5HIFVuxiDuvUgXTUnOhHBlvNw7Mlw66AKxJ4eZo2MLw3wPP7vKMUjUdUXzDdXulRKRlPKE/rQWa0iUq2T8Tk1YYBlqPWkFK1MAeU0qTX6hzOTQFMnZBk1YT1SFxDfqeDzD/G9WIHG6m3KTN3gOsn+4gRx+qgW2whCft+E1QMn8TA3L/13lAgoGlgeWF9uwt6oyrMVG73sJ4A8/h+1SbzdxvYDrybQy8TTgre40ftdJGBVVj7qBvE6W6imyzXXlMFBY1TCAFlVygENLQx6PUP8Dv2vvYlcOVTAbp/n0XO1ZHsLp95LiVW1k6QFf5OfMyJ2NjZegorBPFX8yMfz+ioWnSYze3M=
   file_glob: true
-  file: "dist/announce-new-channel-*.tar.gz"
+  file: dist/announce-new-channel-*.tar.gz
   skip_cleanup: true
   on:
     repo: kaakaa/mmplugin-announce-new-channel

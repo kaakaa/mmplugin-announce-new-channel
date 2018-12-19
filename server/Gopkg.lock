@@ -26,6 +26,38 @@
   version = "v1.4.7"
 
 [[projects]]
+  digest = "1:bd342004ef1bb83bee8709e2ad630e47a95d069f7fcb60ee1b8bceb4bbbe14ae"
+  name = "github.com/gobuffalo/envy"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "801d7253ade1f895f74596b9a96147ed2d3b087e"
+  version = "v1.6.11"
+
+[[projects]]
+  branch = "master"
+  digest = "1:3617620c7cbc54dc84ab1f674ca021c1a9f49eeaa98ff81ceb202a626c7b9c66"
+  name = "github.com/gobuffalo/packd"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "eca3b8fd66872a76119b189bbe0f58f776a2a39f"
+
+[[projects]]
+  digest = "1:47c913f1b6469759fd0e8c6822d638346d170de20422bf5db3de842486756e32"
+  name = "github.com/gobuffalo/packr"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "679459352e18b4c74274a979d695fe13b68730c1"
+  version = "v1.21.9"
+
+[[projects]]
+  branch = "master"
+  digest = "1:da425896866b704cec05178819d7f31c7d5dad4d705403607b971b326bc7fea3"
+  name = "github.com/gobuffalo/syncx"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "558ac7de985fc4f4057bff27c7bdf99e92fe0750"
+
+[[projects]]
   digest = "1:4c0989ca0bcd10799064318923b9bc2db6b4d6338dd75f3f2d86c3511aaaf5cf"
   name = "github.com/golang/protobuf"
   packages = [
@@ -113,12 +145,28 @@
   revision = "2f1d1f20f75d5404f53b9edf6b53ed5505508675"
 
 [[projects]]
+  digest = "1:ecd9aa82687cf31d1585d4ac61d0ba180e42e8a6182b85bd785fcca8dfeefc1b"
+  name = "github.com/joho/godotenv"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "23d116af351c84513e1946b527c88823e476be13"
+  version = "v1.3.0"
+
+[[projects]]
   digest = "1:c568d7727aa262c32bdf8a3f7db83614f7af0ed661474b24588de635c20024c7"
   name = "github.com/magiconair/properties"
   packages = ["."]
   pruneopts = "UT"
   revision = "c2353362d570a7bfa228149c62842019201cfb71"
   version = "v1.8.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:6e2ed1bdbf1d14b4d0be58bcd3f1c3000c1e226964354457b8e6ca69e83a1cbb"
+  name = "github.com/markbates/oncer"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "bf2de49a0be218916e69a11d22866e6cd0a560f2"
 
 [[projects]]
   digest = "1:c15f36bc96ef953b003cf84fd1c6fdaac3f6d38b229fe31dc5f59ef2a623583b"
@@ -205,6 +253,18 @@
   pruneopts = "UT"
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
+
+[[projects]]
+  digest = "1:efafa5160b1666d27e6e1ad4cd3fba27ce73aaaa1e99c3d02e14e55690a8878d"
+  name = "github.com/rogpeppe/go-internal"
+  packages = [
+    "modfile",
+    "module",
+    "semver",
+  ]
+  pruneopts = "UT"
+  revision = "d87f08a7d80821c797ffc8eb8f4e01675f378736"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:d707dbc1330c0ed177d4642d6ae102d5e2c847ebd0eb84562d0dc4f024531cfc"
@@ -402,6 +462,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/gobuffalo/packr",
     "github.com/gorilla/mux",
     "github.com/mattermost/mattermost-server/model",
     "github.com/mattermost/mattermost-server/plugin",
