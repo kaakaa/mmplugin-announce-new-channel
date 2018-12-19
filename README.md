@@ -6,6 +6,11 @@ This plugin creates post about creation of new channel.
 
 ![](./image.png)
 
+## Usage
+
+1. Download `announce-new-channel-*.*.*.tar.gz` from https://github.com/kaakaa/mmplugin-announce-new-channel/releases
+2. Upload downloaded file in plugin setting page (**System Console** > **PLUGINS (BETA)** > **Management**)
+
 ## Requirements for build
 * [dep](https://github.com/golang/dep)
 * [packr](https://github.com/gobuffalo/packr)
