@@ -1,0 +1,24 @@
+notifications:
+  email: false
+
+language: go
+go:
+- '1.11.x'
+
+install:
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - go get -u github.com/gobuffalo/packr/packr
+
+before_deploy:
+- make dist
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Quf9iTVb64cZpGWsaCvKQPjUn7+Y9CR+/pm/ywVadrXyM3CNQO9rb65AOPDkvN29kWazXDKr9SZUy9cE1eokfQEM0ojnNAhyF1+hYwxH78BDJHYDRqZCQJ/ZDvOp4hgDD7st9P/SbDjdQ3yECq/0X0qMH9nfL183kP6qChltl9gBauNRU/qRwH9RCECIPOaWX3psp/2ICwSTTPm4s1TjjFj0sFBNYGfZ8hFo0aitCtwp5xwFoh7ezeoUUYMS2CHtqJJZEvRZos7tBuZaHSOapMJ67HyIhMdRo2H0LXGxYSkt4SnPdHBrtlnrooNMTRHOT6AbGk3t8tFMc6J/Pm425mLCYy3yXpsEb9TAEfBh8mLF2vQogzxNgo44X7q592P19TjlYZ54b1/o/umL22J+0zFW61gLi8wXjyY1WVcYe3KwEPVhOKXfWQpzbQ6Zc6T5Ki5/c8JbghxbxGf5Z4gxIcS35FxmgGhrqV6SWlE6AmnUt6iMJquL9SInSljQc5uKzjwUy7hplcWCVGaDzZ9JJlNwo5m5lqR5w5vP3c/XWs1u0PvcxOIm+ekAxUI/c8lFk4+CS91J2lNuE2DNJm/A5gCWbM8LKVErtLxVeQlGKlZ1wNN5Ohyr0k139pbZhZTSLbbVksqkE88skLMOnVW4adgNK4oeArlUkd5kXQF8Q/o=
+  file_glob: true
+  file: "dist/announce-new-channel-*.tar.gz"
+  skip_cleanup: true
+  on:
+    repo: kaakaa/mmplugin-announce-new-channel
+    tags: true
