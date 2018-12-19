@@ -1,0 +1,35 @@
+{
+    "id": "announce-new-channel",
+    "name": "Announce New Channels",
+    "description": "This plugin announce creation of new channels to town-square.",
+    "version": "0.0.1",
+    "min_server_version": "5.6.0",
+    "server": {
+        "executables": {
+            "linux-amd64": "server/dist/plugin-linux-amd64",
+            "darwin-amd64": "server/dist/plugin-darwin-amd64",
+            "windows-amd64": "server/dist/plugin-windows-amd64.exe"
+        },
+        "executable": ""
+    },
+    "settings_schema": {
+        "settings": [
+            {
+                "key": "IconURL",
+                "display_name": "Override Icon URL",
+                "type": "text",
+                "help_text": "Icon of announcement post is overridden by image indicated by this URL.",
+                "default": "",
+                "placeholder": "https://mattermost.com/wp-content/themes/mattermostv2/img/logo-light.svg"
+            },
+            {
+                "key": "UserName",
+                "display_name": "Override Username",
+                "type": "text",
+                "help_text": "Username of announcement post is overridden by this. If this is blank, username of creator account will be used.",
+                "default": "",
+                "placeholder": "New Channel Announcer"
+            }
+        ]
+    }
+}
