@@ -35,6 +35,8 @@ func (p *Plugin) ChannelHasBeenCreated(c *plugin.Context, channel *model.Channel
 	overrideIconUrl := p.getConfiguration().IconURL
 	overrideUserNmae := p.getConfiguration().UserName
 	props := map[string]interface{}{}
+	props["from_webhook"] = "true"
+	props["override_icon_url"] = fmt.Sprintf("%s/plugins/announce-new-channel/%s", *p.ServerConfig.ServiceSettings.SiteURL, iconFileName)
 	if overrideIconUrl != "" || overrideUserNmae != "" {
 		if overrideIconUrl != "" {
 			props["override_icon_url"] = overrideIconUrl
@@ -43,7 +45,6 @@ func (p *Plugin) ChannelHasBeenCreated(c *plugin.Context, channel *model.Channel
 			props["override_username"] = overrideUserNmae
 		}
 	}
-	props["from_webhook"] = "true"
 	post.Props = props
 
 	if _, appErr := p.API.CreatePost(post); appErr != nil {

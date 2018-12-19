@@ -33,6 +33,12 @@ ifneq ($(wildcard $(GOPATH)/bin/dep),)
 endif
 endif
 
+ifeq ($(PACKR),)
+ifneq ($(wildcard $(GOPATH)/bin/packr),)
+    PACKR = $(GOPATH)/bin/packr
+endif
+endif
+
 # Ensure that dep is installed.
 ifneq ($(HAS_SERVER),)
 ifeq ($(DEP),)
