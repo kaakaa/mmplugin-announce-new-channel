@@ -53,6 +53,3 @@ workflows:
               ignore: /.+/
             tags:
               only: /^v\d+\.\d+\.\d+$/
-      # Why is this setting failed?
-      #  requires:
-      #    - test
