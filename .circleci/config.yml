@@ -33,13 +33,13 @@ jobs:
 
 workflows:
   version: 2
-  build-test-deploy:
+  untagged-build:
     jobs:
       - lint
       - test
+  tagged-build:
+    jobs:
+      - test
       - publish-github-release:
-        filters:
-          branches:
-            ignore: /.*/
-          tags:
-            only: /^v\d+\.\d+\.\d+$/
+        requires:
+          - test
