@@ -5,5 +5,5 @@ var manifest = struct {
 	Version string
 }{
 	Id:      "announce-new-channel",
-	Version: "0.0.1",
+	Version: "0.0.2",
 }
