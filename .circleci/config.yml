@@ -1,0 +1,54 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.0.4
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/golang:1.12
+
+    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
+    steps:
+      - checkout
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: make check-style
+
+  test:
+    docker:
+      - image: circleci/golang:1.12
+
+    working_directory: /go/src/github.com/kaakaa/mmplugin/announce-new-channel
+    steps:
+      - codecov/upload:
+        file: {{ coverage_report_filepath }}
+      #- checkout
+      #- run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      #- run: make test
+  
+  publish-github-release:
+    docker:
+      - image: circleci/golang:1.12
+    working_directory: /go/src/github.com/kaakaa/mmplugin/announce-new-channel
+    steps:
+      - run:
+        name: "Bundle package"
+        command: make bundle
+      - run:
+        name: "Publish Release on GitHub"
+        command: |
+          go get -u githubcom/tcnksm/ghr
+          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJEECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./dist/
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - lint
+      - test
+      - publish-github-release:
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^v\d+\.\d+\.\d+$/
