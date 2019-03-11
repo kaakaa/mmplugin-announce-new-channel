@@ -2,7 +2,7 @@
     "id": "announce-new-channel",
     "name": "Announce New Channels",
     "description": "This plugin announce creation of new channels to town-square.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "min_server_version": "5.6.0",
     "server": {
         "executables": {

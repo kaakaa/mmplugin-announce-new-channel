@@ -1,0 +1,55 @@
+version: 2.1
+executors:
+  default:
+    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
+    docker:
+      - image: circleci/golang:1.12
+
+jobs:
+  lint:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: make check-style
+
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: make test
+  
+  publish-github-release:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run: make dist
+      - run: go get -u github.com/tcnksm/ghr
+      - run: ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJEECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ${CIRCLE_TAG} ./dist/org.kaakaa.mmplugin-channel-recommender-${CIRCLE_TAG}.tar.gz
+
+workflows:
+  version: 2
+  untagged-build:
+    jobs:
+      - lint
+      - test
+  tagged-build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /.+/
+            tags:
+              only: /^v\d+\.\d+\.\d+\.$/
+      - publish-github-release:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.+/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
