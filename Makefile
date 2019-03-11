@@ -1,6 +1,5 @@
 GO ?= $(shell command -v go 2> /dev/null)
 DEP ?= $(shell command -v dep 2> /dev/null)
-PACKR ?= $(shell command -v packr 2> /dev/null)
 NPM ?= $(shell command -v npm 2> /dev/null)
 HTTP ?= $(shell command -v http 2> /dev/null)
 CURL ?= $(shell command -v curl 2> /dev/null)
@@ -50,7 +49,9 @@ endif
 govet:
 ifneq ($(HAS_SERVER),)
 	@echo Running govet
-	@$(GO) vet $$(go list ./server/...) || exit 1
+	$(GO) get golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+	$(GO) vet $$(go list ./server/...)
+	$(GO) vet -vettool=$(GOPATH)/bin/shadow $$(go list ./server/...)
 	@echo Govet success
 endif
 
@@ -66,10 +67,9 @@ endif
 server: server/.depensure
 ifneq ($(HAS_SERVER),)
 	mkdir -p server/dist;
-	cd server && env GOOS=linux GOARCH=amd64 $(PACKR) build -o dist/plugin-linux-amd64;
-	cd server && env GOOS=darwin GOARCH=amd64 $(PACKR) build -o dist/plugin-darwin-amd64;
-	cd server && env GOOS=windows GOARCH=amd64 $(PACKR) build -o dist/plugin-windows-amd64.exe;
-	$(PACKR) clean
+	cd server && env GOOS=linux GOARCH=amd64 $(GO) build -o dist/plugin-linux-amd64;
+	cd server && env GOOS=darwin GOARCH=amd64 $(GO) build -o dist/plugin-darwin-amd64;
+	cd server && env GOOS=windows GOARCH=amd64 $(GO) build -o dist/plugin-windows-amd64.exe;
 endif
 
 # webapp/.npminstall ensures NPM dependencies are installed without having to run this all the time
