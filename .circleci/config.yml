@@ -1,10 +1,12 @@
+defaults: &defaults
+  working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
+
 version: 2.1
 
 jobs:
   lint:
     docker:
       - image: circleci/golang:1.12
-    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -13,7 +15,6 @@ jobs:
   test:
     docker:
       - image: circleci/golang:1.12
-    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -22,7 +23,6 @@ jobs:
   publish-github-release:
     docker:
       - image: circleci/golang:1.12
-    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
       - checkout
       - run: make dist
