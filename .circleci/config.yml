@@ -29,6 +29,7 @@ jobs:
       - checkout
       - run: make dist
       - run: go get -u github.com/tcnksm/ghr
+      - run: echo ${CIRCLE_TAG}
       - run: ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJEECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ./dist/org.kaakaa.mmplugin-channel-recommender-${CIRCLE_TAG}.tar.gz
 
 workflows:
