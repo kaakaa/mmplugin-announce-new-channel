@@ -39,7 +39,20 @@ workflows:
       - test
   tagged-build:
     jobs:
-      - test
+      - test:
+          filters:
+            branches:
+              ignore: /.+/
+            tags:
+              only: /^v\d+\.\d+\.\d+\.$/
       - publish-github-release:
-        requires:
-          - test
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.+/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+      # Why is this setting failed?
+      #  requires:
+      #    - test
