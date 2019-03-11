@@ -1,13 +1,9 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@1.0.4
-
 jobs:
   lint:
     docker:
       - image: circleci/golang:1.12
-
     working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
       - checkout
@@ -17,28 +13,21 @@ jobs:
   test:
     docker:
       - image: circleci/golang:1.12
-
-    working_directory: /go/src/github.com/kaakaa/mmplugin/announce-new-channel
+    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
-      - codecov/upload:
-        file: {{ coverage_report_filepath }}
-      #- checkout
-      #- run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-      #- run: make test
+      - checkout
+      - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - run: make test
   
   publish-github-release:
     docker:
       - image: circleci/golang:1.12
-    working_directory: /go/src/github.com/kaakaa/mmplugin/announce-new-channel
+    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
     steps:
-      - run:
-        name: "Bundle package"
-        command: make bundle
-      - run:
-        name: "Publish Release on GitHub"
-        command: |
-          go get -u githubcom/tcnksm/ghr
-          ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJEECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./dist/
+      - checkout
+      - run: make dist
+      - run: go get -u github.com/tcnksm/ghr
+      - run: ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJEECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ${CIRCLE_TAG} ./dist/org.kaakaa.mmplugin-channel-recommender-${CIRCLE_TAG}.tar.gz
 
 workflows:
   version: 2
