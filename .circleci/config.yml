@@ -1,28 +1,30 @@
-defaults: &defaults
-  working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
-
 version: 2.1
+executors:
+  default:
+    working_directory: /go/src/github.com/kaakaa/mmplugin-announce-new-channel
+    docker:
+      - image: circleci/golang:1.12
 
 jobs:
   lint:
-    docker:
-      - image: circleci/golang:1.12
+    executor:
+      name: default
     steps:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: make check-style
 
   test:
-    docker:
-      - image: circleci/golang:1.12
+    executor:
+      name: default
     steps:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: make test
   
   publish-github-release:
-    docker:
-      - image: circleci/golang:1.12
+    executor:
+      name: default
     steps:
       - checkout
       - run: make dist
