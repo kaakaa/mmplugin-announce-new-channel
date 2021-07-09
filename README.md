@@ -1,3 +1,5 @@
+# This plugin moves to [Mattermost Plugin Anounce New Channel](https://github.com/kaakaa/mattermost-plugin-announce-new-channel)
+
 [![Build Status](https://travis-ci.com/kaakaa/mmplugin-announce-new-channel.svg?branch=master)](https://travis-ci.com/kaakaa/mmplugin-announce-new-channel)
 
 ## announce-new-channel
